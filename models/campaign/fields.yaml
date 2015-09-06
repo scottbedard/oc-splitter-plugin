@@ -1,0 +1,20 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+
+    name:
+        label: bedard.splitter::lang.campaigns.name
+
+    start_at:
+        label: bedard.splitter::lang.campaigns.start_at
+        type: datepicker
+        span: left
+
+    end_at:
+        label: bedard.splitter::lang.campaigns.end_at
+        type: datepicker
+        span: right
+
+

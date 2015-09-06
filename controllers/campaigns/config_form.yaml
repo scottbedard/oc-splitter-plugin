@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Campaign
+
+# Model Form Field configuration
+form: $/bedard/splitter/models/campaign/fields.yaml
+
+# Model Class name
+modelClass: Bedard\Splitter\Models\Campaign
+
+# Default redirect location
+defaultRedirect: bedard/splitter/campaigns
+
+# Create page
+create:
+    title: Create Campaign
+    redirect: bedard/splitter/campaigns/update/:id
+    redirectClose: bedard/splitter/campaigns
+
+# Update page
+update:
+    title: Edit Campaign
+    redirect: bedard/splitter/campaigns
+    redirectClose: bedard/splitter/campaigns
+
+# Preview page
+preview:
+    title: Preview Campaign

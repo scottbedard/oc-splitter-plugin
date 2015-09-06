@@ -1,0 +1,12 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+
+    name:
+        label: bedard.splitter::lang.options.name
+
+    source:
+        label: bedard.splitter::lang.options.source
+        type: codeeditor
