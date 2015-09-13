@@ -7,6 +7,7 @@ use Cms\Classes\Page;
 use Cms\Classes\Layout;
 use Cms\Classes\Partial;
 use Backend\Widgets\Form;
+use October\Rain\Database\Builder;
 use Bedard\Splitter\Models\Impression;
 
 /**
@@ -57,18 +58,31 @@ class Campaign extends Model
         'name'              => 'required',
         'file_name'         => 'required',
         'file_type'         => 'required',
-        'start_at'          => 'required|date',
-        'end_at'            => 'required_with:start_at|date|after:start_at',
+        'start_at'          => 'date',
+        'end_at'            => 'required|date|after:start_at',
         'version_a_content' => 'required',
         'version_b_content' => 'required',
     ];
 
     /**
+     * Before save event
+     */
+    public function beforeSave()
+    {
+        // Start immediately if no start date is provided
+        if (!$this->start_at) {
+            $this->start_at = Carbon::now();
+        }
+    }
+
+    /**
      * Select a campaign by CMS object
      *
-     * @param
+     * @param   Builder     $query
+     * @param   Form        $form
+     * @return  Builder
      */
-    public function scopeWhereCmsObject($query, Form $form)
+    public function scopeWhereCmsObject(Builder $query, Form $form)
     {
         if ($form->model instanceof Layout) $type = 'layout';
         elseif ($form->model instanceof Page) $type = 'page';
@@ -90,11 +104,21 @@ class Campaign extends Model
         return 'template_' . $this->id;
     }
 
+    /**
+     * Returns the impressions string
+     *
+     * @return  string
+     */
     public function getImpressionsString($version)
     {
         return 'version_' . $version . '_impressions';
     }
 
+    /**
+     * Returns the conversions string
+     *
+     * @return  string
+     */
     public function getConversionsString($version)
     {
         return 'version_' . $version . '_conversions';
