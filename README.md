@@ -1,6 +1,6 @@
 # oc-splitter-plugin
 
-[![Build Status](https://travis-ci.org/scottbedard/oc-splitter-plugin.svg?branch=master)](https://travis-ci.org/scottbedard/oc-test-plugin)
+[![Build Status](https://travis-ci.org/scottbedard/oc-splitter-plugin.svg?branch=master)](https://travis-ci.org/scottbedard/oc-splitter-plugin)
 
 ### Installation
 First, make sure your installation of October CMS is up and running with [scheduled tasks up](http://octobercms.com/docs/help/installation#crontab-setup). The easiest way to install this plugin is via the [October CMS plugins page](http://octobercms.com). Alternatively, you can install the plugin manually by executing `git clone https://github.com/scottbedard/oc-splitter-plugin.git bedard/splitter` from your `/plugins` directory.
