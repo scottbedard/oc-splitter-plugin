@@ -19,6 +19,6 @@ before_script:
   - cd october
   - composer install
   - cd plugins/bedard/splitter
-  - composer intall
+  - composer install
 
 script: php vendor/bin/phpunit
