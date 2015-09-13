@@ -30,7 +30,7 @@ class SplitterTest extends \OctoberPluginTestCase {
         $this->assertEquals(1, $campaigns);
     }
 
-    public function test_fetchContent_returns_twig_parsed_content()
+    public function test_renderContent_returns_twig_parsed_content()
     {
         $campaign2 = Campaign::create([
             'name'              => 'Test split2',
@@ -52,7 +52,7 @@ class SplitterTest extends \OctoberPluginTestCase {
             'version_b_content' => 'World {{ split(' . $campaign2->id .') }}',
         ]);
 
-        $content = Splitter::fetchContent($campaign1->id);
+        $content = Splitter::renderContent($campaign1->id);
         $this->assertTrue(in_array($content, ['Hello Foo', 'Hello Bar', 'World Foo', 'World Bar']));
     }
 }

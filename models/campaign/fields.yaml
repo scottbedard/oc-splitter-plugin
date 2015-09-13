@@ -2,36 +2,43 @@
 #  Form Field Definitions
 # ===================================
 
-fields:
+secondaryTabs:
+    fields:
 
-    name:
-        label: bedard.splitter::lang.campaigns.name
-        span: left
+        name:
+            label: bedard.splitter::lang.campaigns.name
+            tab: bedard.splitter::lang.campaigns.generalTab
+            showOnCms: true
+            span: left
 
-    file_name:
-        label: bedard.splitter::lang.campaigns.file_name
-        span: right
+        start_at:
+            label: bedard.splitter::lang.campaigns.start_at
+            tab: bedard.splitter::lang.campaigns.generalTab
+            showOnCms: true
+            type: datepicker
+            span: left
 
-    start_at:
-        label: bedard.splitter::lang.campaigns.start_at
-        type: datepicker
-        span: left
+        end_at:
+            label: bedard.splitter::lang.campaigns.end_at
+            tab: bedard.splitter::lang.campaigns.generalTab
+            showOnCms: true
+            type: datepicker
+            span: right
 
-    end_at:
-        label: bedard.splitter::lang.campaigns.end_at
-        type: datepicker
-        span: right
+        version_a_content:
+            label: bedard.splitter::lang.campaigns.version_a
+            tab: bedard.splitter::lang.campaigns.markupTab
+            showOnCms: true
+            type: codeeditor
+            language: html
+            size: giant
+            span: left
 
-    version_a:
-        label: bedard.splitter::lang.campaigns.version_a
-        type: codeeditor
-        language: html
-        size: giant
-        span: left
-
-    version_b:
-        label: bedard.splitter::lang.campaigns.version_b
-        type: codeeditor
-        language: html
-        size: giant
-        span: right
+        version_b_content:
+            label: bedard.splitter::lang.campaigns.version_b
+            tab: bedard.splitter::lang.campaigns.markupTab
+            showOnCms: true
+            type: codeeditor
+            language: html
+            size: giant
+            span: right

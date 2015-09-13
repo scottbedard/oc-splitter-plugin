@@ -116,7 +116,7 @@ class Plugin extends PluginBase
     {
         return [
             'functions' => [
-                'split' => ['Bedard\Splitter\Classes\Splitter', 'fetchContent'],
+                'split' => ['Bedard\Splitter\Classes\Splitter', 'renderContent'],
             ],
         ];
     }

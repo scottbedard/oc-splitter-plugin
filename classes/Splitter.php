@@ -6,6 +6,7 @@ use Cms\Classes\Page;
 use Cms\Classes\Layout;
 use Cms\Classes\Partial;
 use Backend\Widgets\Form;
+use October\Rain\Parse\Yaml;
 use Bedard\Splitter\Models\Campaign;
 use Twig_Loader_String as TwigStringLoader;
 use Cms\Controllers\Index as IndexController;
@@ -19,54 +20,29 @@ class Splitter {
      */
     public static function extendCmsFormFields(Form $form)
     {
-        $form->secondaryTabs['bedard.splitter::lang.campaigns.cmsTab']['cssClass'] = 'HELLO';
-
+        // Add a hidden field for the campaign id
         if ($campaign = Campaign::whereCmsObject($form)->first()) {
             $form->secondaryTabs['fields']['splitter[id]'] = [
                 'tab'       => 'bedard.splitter::lang.campaigns.cmsTab',
-                'cssClass'  => 'hidden',
                 'default'   => $campaign->id,
+                'cssClass'  => 'hidden',
             ];
 
             $form->model->splitter = $campaign->toArray();
         }
 
-        $form->secondaryTabs['fields']['splitter[name]'] = [
-            'label'     => 'bedard.splitter::lang.campaigns.name',
-            'tab'       => 'bedard.splitter::lang.campaigns.cmsTab',
-        ];
+        // Add the remaining fields from our campaign form definition
+        $yaml = new Yaml;
+        $content = $yaml->parseFile(plugins_path('bedard/splitter/models/campaign/fields.yaml'));
+        $fields = $content['secondaryTabs']['fields'];
 
-        $form->secondaryTabs['fields']['splitter[start_at]'] = [
-            'label'     => 'bedard.splitter::lang.campaigns.start_at',
-            'tab'       => 'bedard.splitter::lang.campaigns.cmsTab',
-            'type'      => 'datepicker',
-            'span'      => 'left',
-        ];
-
-        $form->secondaryTabs['fields']['splitter[end_at]'] = [
-            'label'     => 'bedard.splitter::lang.campaigns.end_at',
-            'tab'       => 'bedard.splitter::lang.campaigns.cmsTab',
-            'type'      => 'datepicker',
-            'span'      => 'right',
-        ];
-
-        $form->secondaryTabs['fields']['splitter[version_a_content]'] = [
-            'label'     => 'bedard.splitter::lang.campaigns.version_a',
-            'tab'       => 'bedard.splitter::lang.campaigns.cmsTab',
-            'type'      => 'codeeditor',
-            'language'  => 'twig',
-            'size'      => 'giant',
-            'span'      => 'left',
-        ];
-
-        $form->secondaryTabs['fields']['splitter[version_b_content]'] = [
-            'label'     => 'bedard.splitter::lang.campaigns.version_b',
-            'tab'       => 'bedard.splitter::lang.campaigns.cmsTab',
-            'type'      => 'codeeditor',
-            'language'  => 'twig',
-            'size'      => 'giant',
-            'span'      => 'right',
-        ];
+        foreach ($fields as $key => $fieldData) {
+            if ($fieldData['showOnCms']) {
+                $fieldData['tab'] = 'bedard.splitter::lang.campaigns.cmsTab';
+                $fieldData['cssClass'] = 'cms-field-padding';
+                $form->secondaryTabs['fields']['splitter[' . $key .']'] = $fieldData;
+            }
+        }
     }
 
     /**
@@ -93,7 +69,7 @@ class Splitter {
      * @param   mixed   $id   The campaign ID or slug
      * @return  string
      */
-    public static function fetchContent($id)
+    public static function renderContent($id)
     {
         if ($campaign = Campaign::find($id)) {
             $twig = App::make('Cms\Classes\Controller')->getTwig();
