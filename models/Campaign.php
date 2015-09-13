@@ -8,7 +8,6 @@ use Cms\Classes\Layout;
 use Cms\Classes\Partial;
 use Backend\Widgets\Form;
 use October\Rain\Database\Builder;
-use Bedard\Splitter\Models\Impression;
 
 /**
  * Campaign Model

@@ -3,17 +3,17 @@
 use App;
 use Carbon\Carbon;
 use Bedard\Splitter\Models\Campaign;
-use Bedard\Splitter\Classes\Splitter;
+use Bedard\Splitter\Classes\CmsHelper;
 use Cms\Controllers\Index as IndexController;
 
-class SplitterTest extends \OctoberPluginTestCase {
+class CmsHelperTest extends \OctoberPluginTestCase {
 
     protected $refreshPlugins = ['Bedard.Splitter'];
 
-    public function test_cmsBeforeSave_handler()
+    public function test_beforeSave_handler()
     {
         $controller = new IndexController;
-        Splitter::cmsBeforeSave($controller, [
+        CmsHelper::beforeSave($controller, [
             'name'              => 'Test split',
             'file_name'         => 'test-split.htm',
             'file_type'         => 'partial',
@@ -52,7 +52,7 @@ class SplitterTest extends \OctoberPluginTestCase {
             'version_b_content' => 'World {{ split(' . $campaign2->id .') }}',
         ]);
 
-        $content = Splitter::renderContent($campaign1->id);
+        $content = CmsHelper::renderContent($campaign1->id);
         $this->assertTrue(in_array($content, ['Hello Foo', 'Hello Bar', 'World Foo', 'World Bar']));
     }
 }

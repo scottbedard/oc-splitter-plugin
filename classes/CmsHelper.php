@@ -11,14 +11,14 @@ use Bedard\Splitter\Models\Campaign;
 use Twig_Loader_String as TwigStringLoader;
 use Cms\Controllers\Index as IndexController;
 
-class Splitter {
+class CmsHelper {
 
     /**
      * Extend the CMS form fields
      *
      * @param   Form        $form
      */
-    public static function extendCmsFormFields(Form $form)
+    public static function extendFormFields(Form $form)
     {
         // Add a hidden field for the campaign id
         if ($campaign = Campaign::whereCmsObject($form)->first()) {
@@ -51,7 +51,7 @@ class Splitter {
      * @param   IndexController     $controller
      * @param   array               $data
      */
-    public static function cmsBeforeSave(IndexController $controller, array $data)
+    public static function beforeSave(IndexController $controller, array $data)
     {
         $campaign = array_key_exists('id', $data)
             ? Campaign::firstOrNew(['id' => $data['id']])

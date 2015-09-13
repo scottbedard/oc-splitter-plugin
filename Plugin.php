@@ -6,7 +6,7 @@ use Backend;
 // use Cms\Classes\Layout;
 use Cms\Classes\Partial;
 use System\Classes\PluginBase;
-use Bedard\Splitter\Classes\Splitter;
+use Bedard\Splitter\Classes\CmsHelper;
 
 /**
  * Splitter Plugin Information File
@@ -37,14 +37,14 @@ class Plugin extends PluginBase
         // Extend the backend partial form
         Event::listen('backend.form.extendFieldsBefore', function($form) {
             if ($form->model instanceof Partial) {
-                Splitter::extendCmsFormFields($form);
+                CmsHelper::extendFormFields($form);
             }
         });
 
         // Manage campaigns before a cms object is saved
         Event::listen('cms.template.processSettingsBeforeSave', function($controller) {
             if ($data = input('splitter')) {
-                Splitter::cmsBeforeSave($controller, input('splitter'));
+                CmsHelper::beforeSave($controller, input('splitter'));
             }
         });
     }
@@ -116,7 +116,7 @@ class Plugin extends PluginBase
     {
         return [
             'functions' => [
-                'split' => ['Bedard\Splitter\Classes\Splitter', 'renderContent'],
+                'split' => ['Bedard\Splitter\Classes\CmsHelper', 'renderContent'],
             ],
         ];
     }
