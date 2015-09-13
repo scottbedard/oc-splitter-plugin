@@ -75,6 +75,22 @@ class Campaign extends Model
     }
 
     /**
+     * Selects active campaigns
+     *
+     * @param   Builder     $query
+     * @return  Builder
+     */
+    public function scopeIsActive(Builder $query)
+    {
+        return $query->where(function($condition) {
+            $now = Carbon::now();
+            $condition
+                ->where('start_at', '<=', $now)
+                ->where('end_at', '>', $now);
+        });
+    }
+
+    /**
      * Select a campaign by CMS object
      *
      * @param   Builder     $query

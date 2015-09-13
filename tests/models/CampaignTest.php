@@ -76,4 +76,29 @@ class CampaignTest extends \OctoberPluginTestCase
 
         $this->assertEquals(1, $campaign->$conversions);
     }
+
+    public function test_isActive_scope()
+    {
+        // Active 1, defined start date
+        $active1 = $this->mockCampaign();
+        $active1->start_at = Carbon::yesterday();
+        $active1->save();
+
+        // Inactive 1, expired end date
+        $inactive1 = $this->mockCampaign();
+        $inactive1->start_at = Carbon::yesterday()->subDays(1);
+        $inactive1->end_at = Carbon::yesterday();
+        $inactive1->save();
+
+        // Inactive 2, future start date
+        $inactive2 = $this->mockCampaign();
+        $inactive2->start_at = Carbon::tomorrow();
+        $inactive2->end_at = Carbon::tomorrow()->addDays(1);
+        $inactive2->save();
+
+        // Query the active campaigns
+        $query = Campaign::isActive()->get();
+        $this->assertEquals(1, $query->count());
+        $this->assertEquals($active1->id, $query->first()->id);
+    }
 }
