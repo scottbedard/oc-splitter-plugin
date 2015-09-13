@@ -6,6 +6,11 @@ fields:
 
     name:
         label: bedard.splitter::lang.campaigns.name
+        span: left
+
+    file_name:
+        label: bedard.splitter::lang.campaigns.file_name
+        span: right
 
     start_at:
         label: bedard.splitter::lang.campaigns.start_at
@@ -17,4 +22,16 @@ fields:
         type: datepicker
         span: right
 
+    version_a:
+        label: bedard.splitter::lang.campaigns.version_a
+        type: codeeditor
+        language: html
+        size: giant
+        span: left
 
+    version_b:
+        label: bedard.splitter::lang.campaigns.version_b
+        type: codeeditor
+        language: html
+        size: giant
+        span: right

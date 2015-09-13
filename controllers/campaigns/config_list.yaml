@@ -9,7 +9,7 @@ list: $/bedard/splitter/models/campaign/columns.yaml
 modelClass: Bedard\Splitter\Models\Campaign
 
 # List Title
-title: Manage Campaigns
+title: bedard.splitter::lang.campaigns.list_title
 
 # Link URL for each record
 recordUrl: bedard/splitter/campaigns/update/:id
@@ -32,7 +32,7 @@ showSorting: true
 #     direction: desc
 
 # Display checkboxes next to each record
-# showCheckboxes: true
+showCheckboxes: true
 
 # Toolbar widget configuration
 toolbar:

@@ -1,7 +1,7 @@
 <?php Block::put('breadcrumb') ?>
     <ul>
-        <li><a href="<?= Backend::url('bedard/splitter/campaigns') ?>">Campaigns</a></li>
-        <li><?= e($this->pageTitle) ?></li>
+        <li><a href="<?= Backend::url('bedard/splitter/campaigns') ?>"><?= e(trans('bedard.splitter::lang.campaigns.controller')) ?></a></li>
+        <li><?= e(trans('backend::lang.form.create_title', ['name' => trans('bedard.splitter::lang.campaigns.model')])) ?></li>
     </ul>
 <?php Block::endPut() ?>
 
@@ -19,21 +19,25 @@
                     type="submit"
                     data-request="onSave"
                     data-hotkey="ctrl+s, cmd+s"
-                    data-load-indicator="Creating Campaign..."
+                    data-load-indicator="<?= e(trans('backend::lang.form.creating_name', [
+                        'name' => trans('bedard.splitter::lang.campaigns.model'
+                    )])) ?>"
                     class="btn btn-primary">
-                    Create
+                    <?= e(trans('backend::lang.form.create')) ?>
                 </button>
                 <button
                     type="button"
                     data-request="onSave"
                     data-request-data="close:1"
                     data-hotkey="ctrl+enter, cmd+enter"
-                    data-load-indicator="Creating Campaign..."
+                    data-load-indicator="<?= e(trans('backend::lang.form.creating_name', [
+                        'name' => trans('bedard.splitter::lang.campaigns.model')
+                    ])) ?>"
                     class="btn btn-default">
-                    Create and Close
+                    <?= e(trans('backend::lang.form.create_and_close')) ?>
                 </button>
                 <span class="btn-text">
-                    or <a href="<?= Backend::url('bedard/splitter/campaigns') ?>">Cancel</a>
+                    <?= e(trans('backend::lang.form.or')) ?> <a href="<?= Backend::url('bedard/splitter/campaigns') ?>"><?= e(trans('backend::lang.form.cancel')) ?></a>
                 </span>
             </div>
         </div>
@@ -43,6 +47,10 @@
 <?php else: ?>
 
     <p class="flash-message static error"><?= e($this->fatalError) ?></p>
-    <p><a href="<?= Backend::url('bedard/splitter/campaigns') ?>" class="btn btn-default">Return to campaigns list</a></p>
+    <p>
+        <a href="<?= Backend::url('bedard/splitter/campaigns') ?>" class="btn btn-default">
+            <?= e(trans('bedard.splitter::lang.form.return_to_name_list', ['name' => trans('bedard.splitter::lang.campains.model')])) ?>
+        </a>
+    </p>
 
 <?php endif ?>

@@ -1,7 +1,7 @@
 <?php Block::put('breadcrumb') ?>
     <ul>
-        <li><a href="<?= Backend::url('bedard/splitter/campaigns') ?>">Campaigns</a></li>
-        <li><?= e($this->pageTitle) ?></li>
+        <li><a href="<?= Backend::url('bedard/splitter/campaigns') ?>"><?= e(trans('bedard.splitter::lang.campaigns.controller')) ?></a></li>
+        <li><?= e(trans('backend::lang.form.preview_title', ['name' => e(trans('bedard.splitter::lang.campaigns.model'))])) ?></li>
     </ul>
 <?php Block::endPut() ?>
 
@@ -14,6 +14,10 @@
 <?php else: ?>
 
     <p class="flash-message static error"><?= e($this->fatalError) ?></p>
-    <p><a href="<?= Backend::url('bedard/splitter/campaigns') ?>" class="btn btn-default">Return to campaigns list</a></p>
+    <p>
+        <a href="<?= Backend::url('bedard/splitter/campaigns') ?>" class="btn btn-default">
+            <?= e(trans('bedard.splitter::lang.form.return_to_name_list', ['name' => e(trans('bedard.splitter::lang.campaigns.model'))])) ?>
+        </a>
+    </p>
 
 <?php endif ?>

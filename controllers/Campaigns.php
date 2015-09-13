@@ -21,5 +21,7 @@ class Campaigns extends Controller
         parent::__construct();
 
         BackendMenu::setContext('Bedard.Splitter', 'splitter', 'campaigns');
+
+        $this->addCss('/plugins/bedard/splitter/assets/dist/splitter.min.css');
     }
 }

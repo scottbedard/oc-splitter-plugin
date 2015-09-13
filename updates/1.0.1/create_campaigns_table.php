@@ -12,8 +12,15 @@ class CreateCampaignsTable extends Migration
         {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('name');
-            $table->string('file_name');
+            $table->string('name')->nullable();
+            $table->string('file_name')->nullable();
+            $table->string('file_type')->nullable();
+            $table->text('version_a_content')->nullable();
+            $table->integer('version_a_impressions')->unsigned()->default(0);
+            $table->integer('version_a_conversions')->unsigned()->default(0);
+            $table->text('version_b_content')->nullable();
+            $table->integer('version_b_impressions')->unsigned()->default(0);
+            $table->integer('version_b_conversions')->unsigned()->default(0);
             $table->timestamp('start_at')->nullable();
             $table->timestamp('end_at')->nullable();
             $table->timestamps();

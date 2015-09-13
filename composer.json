@@ -1,0 +1,21 @@
+{
+    "name": "bedard/splitter",
+    "description": "Split testing for October CMS.",
+    "homepage": "http://scottbedard.net/",
+    "keywords": ["octobercms", "splitter", "split testing"],
+    "authors": [
+        {
+            "name": "Scott Bedard",
+            "email": "scottbedard90@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Bedard\\Splitter\\Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.7.*@dev",
+        "keios/oc-plugin-testsuite": "dev-master"
+    }
+}

@@ -3,7 +3,7 @@
 # ===================================
 
 # Record name
-name: Campaign
+name: bedard.splitter::lang.campaigns.model
 
 # Model Form Field configuration
 form: $/bedard/splitter/models/campaign/fields.yaml
@@ -16,16 +16,16 @@ defaultRedirect: bedard/splitter/campaigns
 
 # Create page
 create:
-    title: Create Campaign
+    title: backend::lang.relation.create_name
     redirect: bedard/splitter/campaigns/update/:id
     redirectClose: bedard/splitter/campaigns
 
 # Update page
 update:
-    title: Edit Campaign
+    title: backend::lang.relation.update_name
     redirect: bedard/splitter/campaigns
     redirectClose: bedard/splitter/campaigns
 
 # Preview page
 preview:
-    title: Preview Campaign
+    title: backend::lang.relation.preview_name

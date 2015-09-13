@@ -7,6 +7,7 @@ use Model;
  */
 class Settings extends Model
 {
+    use \October\Rain\Database\Traits\Validation;
 
     public $implement = ['System.Behaviors.SettingsModel'];
 
@@ -14,4 +15,8 @@ class Settings extends Model
 
     public $settingsFields = 'fields.yaml';
 
+    /**
+     * @var array Validation
+     */
+    public $rules = [];
 }
