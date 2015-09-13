@@ -21,6 +21,7 @@ class CreateCampaignsTable extends Migration
             $table->text('version_b_content')->nullable();
             $table->integer('version_b_impressions')->unsigned()->default(0);
             $table->integer('version_b_conversions')->unsigned()->default(0);
+            $table->boolean('is_running')->default(false);
             $table->timestamp('start_at')->nullable();
             $table->timestamp('end_at')->nullable();
             $table->timestamps();

@@ -2,8 +2,6 @@
 
 use Event;
 use Backend;
-// use Cms\Classes\Page;
-// use Cms\Classes\Layout;
 use Cms\Classes\Partial;
 use System\Classes\PluginBase;
 use Bedard\Splitter\Classes\CmsHelper;
@@ -30,7 +28,28 @@ class Plugin extends PluginBase
     }
 
     /**
+     * Register a console command to start / end campaigns
+     *
+     * @return  void
+     */
+    public function register()
+    {
+        $this->registerConsoleCommand('splitter:update', 'Bedard\Splitter\Console\Update');
+    }
+    /**
+     * Look for campaigns to start / end every 10 minutes
+     *
+     * @return  void
+     */
+    public function registerSchedule($schedule)
+    {
+        $schedule->command('splitter:update')->everyTenMinutes();
+    }
+
+    /**
      * Hook into system events
+     *
+     * @return  void
      */
     public function boot()
     {

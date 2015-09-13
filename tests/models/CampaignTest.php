@@ -77,7 +77,26 @@ class CampaignTest extends \OctoberPluginTestCase
         $this->assertEquals(1, $campaign->$conversions);
     }
 
-    public function test_isActive_scope()
+    public function test_isRunning_and_isNotRunning_scopes()
+    {
+        $running = $this->mockCampaign();
+        $running->is_running = true;
+        $running->save();
+
+        $not = $this->mockCampaign();
+        $not->is_running = false;
+        $not->save();
+
+        $query = Campaign::isRunning()->get();
+        $this->assertEquals(1, $query->count());
+        $this->assertEquals($running->id, $query->first()->id);
+
+        $query = Campaign::isNotRunning()->get();
+        $this->assertEquals(1, $query->count());
+        $this->assertEquals($not->id, $query->first()->id);
+    }
+
+    public function test_isActive_and_isNotActive_scopes()
     {
         // Active 1, defined start date
         $active1 = $this->mockCampaign();
@@ -100,5 +119,9 @@ class CampaignTest extends \OctoberPluginTestCase
         $query = Campaign::isActive()->get();
         $this->assertEquals(1, $query->count());
         $this->assertEquals($active1->id, $query->first()->id);
+
+        // Query the inactive campaigns
+        $query = Campaign::isNotActive()->get();
+        $this->assertEquals(2, $query->count());
     }
 }

@@ -91,6 +91,44 @@ class Campaign extends Model
     }
 
     /**
+     * Selects inactive campaigns
+     *
+     * @param   Builder     $query
+     * @return  Builder
+     */
+    public function scopeIsNotActive(Builder $query)
+    {
+        return $query->where(function($condition) {
+            $now = Carbon::now();
+            $condition
+                ->where('start_at', '>', $now)
+                ->orWhere('end_at', '<=', $now);
+        });
+    }
+
+    /**
+     * Selects campaigns that are currently running
+     *
+     * @param   Builder     $query
+     * @return  Builder
+     */
+    public function scopeIsRunning(Builder $query)
+    {
+        return $query->where('is_running', true);
+    }
+
+    /**
+     * Selects campaigns that are not currently running
+     *
+     * @param   Builder     $query
+     * @return  Builder
+     */
+    public function scopeIsNotRunning(Builder $query)
+    {
+        return $query->where('is_running', false);
+    }
+
+    /**
      * Select a campaign by CMS object
      *
      * @param   Builder     $query
