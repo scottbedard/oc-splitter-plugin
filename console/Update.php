@@ -22,7 +22,7 @@ class Update extends Command
     }
 
     /**
-     * Find abandoned payments and tell their driver to abandon them
+     * Start active campaigns and stop inactive ones
      */
     public function fire()
     {
