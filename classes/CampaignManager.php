@@ -6,6 +6,12 @@ use Bedard\Splitter\Models\Campaign;
 
 class CampaignManager {
 
+    /**
+     * Load a partial
+     *
+     * @param   Campaign    $campaign
+     * @return  Partial
+     */
     public static function getPartial(Campaign $campaign)
     {
         return Partial::load(Theme::getActiveTheme(), $campaign->file_name);
@@ -24,14 +30,11 @@ class CampaignManager {
         }
 
         $partial = self::getPartial($campaign);
-        if ($partial->markup) {
-            $partial->markup = "{# << Original file content >>\n" . $partial->markup . "\n#}\n\n";
-        }
-
-        $markup = "{# SPLIT TEST IN PROGERSS #}\n\n";
+        $markup = "{# ".trans('bedard.splitter::lang.campaigns.in_progress_message')." #}\n".
+                  "{# ".trans('bedard.splitter::lang.campaigns.in_progress_warning')." #}\n\n";
 
         if ($partial->markup) {
-            $markup .= "{# << Original file content >>\n" . $partial->markup . "\n#}\n\n";
+            $markup .= "{# ".trans('bedard.splitter::lang.campaigns.in_progress_original')."\n" . $partial->markup . "\n#}\n\n";
         }
 
         $markup .= "{{ split($campaign->id) }}";
