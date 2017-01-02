@@ -1,5 +1,7 @@
 # oc-splitter-plugin
 
+> **Warning:** This plugin is a work in progress, and is not ready for use by anyone.
+
 [![Build Status](https://travis-ci.org/scottbedard/oc-splitter-plugin.svg?branch=master)](https://travis-ci.org/scottbedard/oc-splitter-plugin)
 
 ### Installation
